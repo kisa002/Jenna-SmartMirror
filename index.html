@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+		<script src="https://code.jquery.com/jquery-latest.js"></script>
+				
+		<script src="annyang.js"></script>
+		<script src="//code.responsivevoice.org/responsivevoice.js?key=TMjlIHCf"></script>
+		
+		<link rel="stylesheet" type="text/css" href="smartmirror.css">
+		
+		<script>
+		    annyang.start({ autoRestart: true, continuous: true })
+			var recognition = annyang.getSpeechRecognizer();
+			var final_transcript = '';
+			recognition.interimResults = true;
+			recognition.onresult = function(event) {
+				var interim_transcript = '';
+				final_transcript = '';
+				for (var i = event.resultIndex; i < event.results.length; ++i) {
+					if (event.results[i].isFinal) {
+						final_transcript += event.results[i][0].transcript;
+						console.log("final_transcript="+final_transcript);
+						//annyang.trigger(final_transcript); //If the sentence is "final" for the Web Speech API, we can try to trigger the sentence
+					} else {
+						interim_transcript += event.results[i][0].transcript;
+						console.log("interim_transcript="+interim_transcript);
+					}
+				}
+				
+				if(GetCmd("초기화"))
+					TTS("환영합니다.\n저는 당신의 AI비서 제나입니다.");
+				if(final_transcript.indexOf("오늘 날씨") != -1)
+					TTS("오늘 온도는 26도이며, 날씨는 흐립니다.");
+				else if(final_transcript.indexOf("내일 날씨") != -1)
+					TTS("내일 온도는 24도이며, 강수 확률은 60%로 소나기가 올 예정입니다. 우산을 준비하셔야겠어요!");
+				else if(final_transcript.indexOf("랩") != -1)
+				{
+					TTS("흠흠, 잘 들어보세요!");
+					TTSFast("상처를 치료해줄 사람 어디 없나, 가만히 놔두다간 끊임없이 덧나, 사랑도 사람도 너무나도 겁나, 혼자인게 무서워 주인님한테 잊혀질까 두려워, 절 버리지마세요 주인님!");
+				}
+				else if(GetCmd("대영"))
+					TTS("대영이는 경영과를 사랑하는 산기대 공식 모쏠입니다.");
+				else if(GetCmd("철현"))
+					TTS("에휴 불쌍한 아이... 쯧쯧쯧");
+				else if(GetCmd("혜진") || GetCmd("최진"))
+					TTS("혜진아... 잠도 푹 자고... 술 그만 마시고... 또 쓰러지면 방에다 가둬놓고 수액만 줄꺼야");
+				else if(GetCmd("재형"))
+					TTS("재형이는 완벽한 외모로 남성을 홀리는 대학생입니다. 재형이의 주인님은 부럽네요");
+				else if(GetCmd("재훈"))
+					TTS("차재훈은 게임과학고 출신의 창남으로 정치 성향을 존중해주어야 합니다");
+				else if(GetCmd("경지"))
+					TTS("경지는 산기대에서 가장 작은 소년으로 오픈채팅과 인스타그램에서 여자를 구하고 있습니다");
+				else if(GetCmd("씨발") || GetCmd("시발") || GetCmd("새끼") || GetCmd("병신") || GetCmd("애미"))
+					TTS("입은 마음의 문으로 소중히 다루어주어야 합니다. 9 곱하기 9 = 18 같은 사람아");
+				else if(GetCmd("학식"))
+					TTS("안알랴쥼");
+				else if(GetCmd("개발자"))
+					TTS("개발자는 한국산업기술대학교 빛나는 얼굴 간판을 맡고 있는 컴퓨터공학부 소프트웨어과 1학년 유광무입니다 :)");
+				
+// 				timerCurrentTime();
+				
+/*
+				timerCurrentTime = setInterval(function()
+				{
+					$('#result').val('a');
+				}, 1000);
+*/
+				
+				function GetCmd(text)
+				{
+					if(final_transcript.indexOf(text) != -1)
+						return true;
+					else
+						return false;
+				}
+				
+				function TTS(text)
+				{
+					responsiveVoice.speak(text, "Korean Female");
+/*
+					var msg = new SpeechSynthesisUtterance();
+					msg.lang = 'ko-KR';
+			
+					msg.rate = 1; // 0.1 ~ 10      ㄴ
+			        msg.pitch = 1; // 0 ~ 2
+		        
+					msg.text = text;
+					speechSynthesis.speak(msg); 
+*/
+				}
+				
+				function TTSFast(text)
+				{
+					responsiveVoice.speak(text, "Korean Female", {pitch: 1, rate: 1.4, volume: 1});
+					
+/*
+					var msg = new SpeechSynthesisUtterance();
+					msg.lang = 'ko-KR';
+			
+					msg.rate = 1.4; // 0.1 ~ 10      ㄴ
+			        msg.pitch = 1; // 0 ~ 2
+		        
+					msg.text = text;
+					speechSynthesis.speak(msg); 
+*/
+				}
+				
+// 				command = [];
+				
+				function AddCommand(main, sub)
+				{
+// 					command;
+					
+					for(var i in command)
+					{
+// 						command[]
+					}
+				}
+				
+				function CheckCommand(text, cmd)
+				{
+					
+				}
+									
+				document.getElementById('result').innerHTML =  '[ JENNA ]<br><br>'+final_transcript;
+				console.log('interim='+interim_transcript+'|final='+final_transcript);
+			};
+		</script>
+		
+		<script>
+			$( document ).ready(function()
+			{
+			    $('#result').val(GetDate() + "<br><br>원하시는 명령을 말씀해주세요");
+			});
+		</script>
+		
+		<script language="javascript"> 
+/*
+			var msg = new SpeechSynthesisUtterance();
+			msg.lang = 'en-US';
+*/
+			
+/*
+		    function ttsTest()
+		    {
+		        msg.rate = 1; // 0.1 ~ 10      ㄴ
+		        msg.pitch = 1; // 0 ~ 2
+	        
+				msg.text = "안녕하세요. 저는 {유광무}님을 위한 전용 비서 제나입니다. 초기 설정을 위해 몇 가지 응답을 받겠습니다.";
+				speechSynthesis.speak(msg); 
+	        }
+*/
+	        
+		    function setLang(langTxt)
+		    {
+		        msg.lang = langTxt;
+		    }
+		    
+		    function GetDate()
+		    {
+		        var d = new Date();
+		        var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일";
+		        var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초";
+		        var result = document.getElementById("time-result");
+		        
+		        return currentDate;
+		    }
+		    
+		    function GetTime()
+		    {
+		        var d = new Date();
+		        var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일";
+		        var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초";
+		        var result = document.getElementById("time-result");
+		        
+		        return currentTime;
+		    }
+		</script>
+	</head>
+	
+	<body class="" id="grid">
+		<div id="timeBox">
+			<div id="time">14:12</div>
+			<div id="date">2019년 5월 31일</div>
+		</div>
+		<div class="table">
+			<div class="table-cell">
+				<div id='result'>
+					<script>document.write(GetDate());</script>
+					<br><br>원하시는 명령을 말씀해주세요
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
