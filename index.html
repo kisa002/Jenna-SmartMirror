@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 		<script src="https://code.jquery.com/jquery-latest.js"></script>
 				
@@ -52,6 +53,8 @@
 					TTS("차재훈은 게임과학고 출신의 창남으로 정치 성향을 존중해주어야 합니다");
 				else if(GetCmd("경지"))
 					TTS("경지는 산기대에서 가장 작은 소년으로 오픈채팅과 인스타그램에서 여자를 구하고 있습니다");
+				else if(GetCmd("동현"))
+					TTS("강동현은 제 2기숙사 734호 2번 방에 사는 담배 중독자로, 매일 밤 알 수 없는 소리와 함께 샷건을 남발합니다.");
 				else if(GetCmd("씨발") || GetCmd("시발") || GetCmd("새끼") || GetCmd("병신") || GetCmd("애미"))
 					TTS("입은 마음의 문으로 소중히 다루어주어야 합니다. 9 곱하기 9 = 18 같은 사람아");
 				else if(GetCmd("학식"))
@@ -79,49 +82,11 @@
 				function TTS(text)
 				{
 					responsiveVoice.speak(text, "Korean Female");
-/*
-					var msg = new SpeechSynthesisUtterance();
-					msg.lang = 'ko-KR';
-			
-					msg.rate = 1; // 0.1 ~ 10      ㄴ
-			        msg.pitch = 1; // 0 ~ 2
-		        
-					msg.text = text;
-					speechSynthesis.speak(msg); 
-*/
 				}
 				
 				function TTSFast(text)
 				{
 					responsiveVoice.speak(text, "Korean Female", {pitch: 1, rate: 1.4, volume: 1});
-					
-/*
-					var msg = new SpeechSynthesisUtterance();
-					msg.lang = 'ko-KR';
-			
-					msg.rate = 1.4; // 0.1 ~ 10      ㄴ
-			        msg.pitch = 1; // 0 ~ 2
-		        
-					msg.text = text;
-					speechSynthesis.speak(msg); 
-*/
-				}
-				
-// 				command = [];
-				
-				function AddCommand(main, sub)
-				{
-// 					command;
-					
-					for(var i in command)
-					{
-// 						command[]
-					}
-				}
-				
-				function CheckCommand(text, cmd)
-				{
-					
 				}
 									
 				document.getElementById('result').innerHTML =  '[ JENNA ]<br><br>'+final_transcript;
@@ -136,28 +101,7 @@
 			});
 		</script>
 		
-		<script language="javascript"> 
-/*
-			var msg = new SpeechSynthesisUtterance();
-			msg.lang = 'en-US';
-*/
-			
-/*
-		    function ttsTest()
-		    {
-		        msg.rate = 1; // 0.1 ~ 10      ㄴ
-		        msg.pitch = 1; // 0 ~ 2
-	        
-				msg.text = "안녕하세요. 저는 {유광무}님을 위한 전용 비서 제나입니다. 초기 설정을 위해 몇 가지 응답을 받겠습니다.";
-				speechSynthesis.speak(msg); 
-	        }
-*/
-	        
-		    function setLang(langTxt)
-		    {
-		        msg.lang = langTxt;
-		    }
-		    
+		<script language="javascript"> 	        		    
 		    function GetDate()
 		    {
 		        var d = new Date();
@@ -180,16 +124,24 @@
 		</script>
 	</head>
 	
-	<body class="" id="grid">
+	<body>
+		<div id="weatherBox" class="">
+			<div id="temperature">69°C</div>
+			<div id="weather">구름 많음</div>
+		</div>
+		
 		<div id="timeBox">
 			<div id="time">14:12</div>
 			<div id="date">2019년 5월 31일</div>
 		</div>
-		<div class="table">
-			<div class="table-cell">
-				<div id='result'>
-					<script>document.write(GetDate());</script>
-					<br><br>원하시는 명령을 말씀해주세요
+		
+		<div class="grid">
+			<div class="table">
+				<div class="table-cell">
+					<div id='result'>
+						<script>document.write(GetDate());</script>
+						<br><br>원하시는 명령을 말씀해주세요
+					</div>
 				</div>
 			</div>
 		</div>
