@@ -61,16 +61,7 @@
 					TTS("안알랴쥼");
 				else if(GetCmd("개발자"))
 					TTS("개발자는 한국산업기술대학교 빛나는 얼굴 간판을 맡고 있는 컴퓨터공학부 소프트웨어과 1학년 유광무입니다 :)");
-				
-// 				timerCurrentTime();
-				
-/*
-				timerCurrentTime = setInterval(function()
-				{
-					$('#result').val('a');
-				}, 1000);
-*/
-				
+								
 				function GetCmd(text)
 				{
 					if(final_transcript.indexOf(text) != -1)
@@ -117,22 +108,98 @@
 		        var d = new Date();
 		        var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일";
 		        var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초";
-		        var result = document.getElementById("time-result");
 		        
 		        return currentTime;
 		    }
 		</script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#time").text(GetTime());
+				$("#date").text(GetDate());
+				
+				function GetTime()
+				{
+					var d = new Date();
+					
+					hours = d.getHours();
+					
+					if(hours > 12)
+					{
+						hours -= 12;
+						
+						hours = "오후 " + hours;
+					}
+					else
+						hours = "오전 " + hours;
+					
+			        var currentTime = hours + ":" + d.getMinutes();//+ d.getSeconds();
+			        
+			        return currentTime;
+				}
+				
+				function GetDate()
+			    {
+			        var d = new Date();
+			        
+			        var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일";
+			        var result = document.getElementById("time-result");
+			        
+			        return currentDate;
+			    }
+				
+				timerTimeDate = setInterval(function()
+				{
+					$("#time").text(GetTime());
+					$("#date").text(GetDate());
+				}, 1000);
+				
+				temp = 0;
+				isUp = true;
+				timerTemperature = setInterval(function()
+				{
+					if(isUp)
+					{
+						temp += 1;
+						
+						if(temp > 1000)
+							isUp = false;
+					}
+					else
+					{
+						temp -= 1;
+						
+						if(temp <= 0)
+							isUp = true;
+					}
+					
+					$("#temperature").text(temp + "°C");
+				}, 1);
+			});
+		</script>
 	</head>
 	
 	<body>
-		<div id="weatherBox" class="">
-			<div id="temperature">69°C</div>
-			<div id="weather">구름 많음</div>
+		<div class="top">
+			<div id="timeBox">
+				<div id="time">이게 보인다면 버그가 생긴거야</div>
+				<div id="date">관리자에게 알려줘!</div>
+			</div>
+			
+			<div id="weatherBox" class="">
+				<div id="temperature">69°C</div>
+				<div id="weather">구름 많음</div>
+			</div>
 		</div>
 		
-		<div id="timeBox">
-			<div id="time">14:12</div>
-			<div id="date">2019년 5월 31일</div>
+		<div class="itemBox">
+			<div class="menu">오늘 시간표</div>
+			<div class="underline"><hr></div>
+			<div class="schedule">1교시 - 수학1</div>
+			<div class="schedule">2교시 - 수학1</div>
+			<div class="schedule">3교시 - 프로그래밍 기초</div>
+			<div class="schedule">4교시 - 프로그래밍 기초</div>
+			<div class="schedule">6교시 - 하드웨어개론</div>
 		</div>
 		
 		<div class="grid">

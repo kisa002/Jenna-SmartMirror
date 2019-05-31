@@ -5,6 +5,9 @@ body
 	
 	font-family: 'NanumSquare', sans-serif;
 	font-weight: 1;
+	
+	margin: 0px;
+	padding: 0px;
 }
 
 .testBox
@@ -12,12 +15,69 @@ body
 	background-color: rgba(46, 94, 206, 0.55);
 }
 
-#weatherBox
+.top
 {
+	width: 100%;
+	height: 250px;
+}
+
+.itemBox
+{
+	width: 300px;
+	
+	margin-left: 50px;
+}
+
+.itemBox .menu
+{
+	font-size: 2rem;
+	font-weight: 500;
+}
+
+.itemBox .underline
+{
+	width: 300px;
+	
+/* 	margin-left: 30px; */
+}
+
+#timeBox
+{
+	margin-top: 50px;
+	margin-left: 50px;
+	
+	color: white;
 	float: left;
 	
-	margin-top: 30px;
-	margin-left: 30px;
+/* 	width: 300px; */
+	height: 150px;
+	
+/* 	background-color: rgba(46, 94, 206, 0.55); */
+}
+
+#timeBox #time
+{
+	font-size: 4rem;
+	text-align: left;
+}
+
+#timeBox #date
+{
+	font-size: 2rem;
+	text-align: left;
+	
+	margin-left: 10px;
+}
+
+
+#weatherBox
+{
+	float: right;
+	
+	margin-top: 50px;
+	margin-right: 50px;
+	
+	margin-bottom: 50px;
 }
 
 #weatherBox #temperature
@@ -32,41 +92,25 @@ body
 	font-size: 2rem;
 }
 
-#timeBox
+.schedule
 {
-	margin-top: 30px;
-	margin-right: 30px;
-	
-	color: white;
-	float: right;
-	
-/* 	width: 300px; */
-	height: 150px;
-	
-/* 	background-color: rgba(46, 94, 206, 0.55); */
+	font-size: 1.8rem;
 }
 
-#timeBox #time
+.grid
 {
-	font-size: 4rem;
-	text-align: center;
-	
-/* 	font-weight: bold; */
-/* 	margin-right: 30px; */
-}
+	padding-top: 120%; /* MAXIMUM 130% */
 
-#timeBox #date
-{
-	font-size: 2rem;
-	text-align: right;
+	width: 99%;
+/* 	height: 100%; */
+	
+	position: absolute;
 }
 
 .table
 {
 	display: table;
 /* 	position: relative; */
-	
-	margin-top: 100px;
 	
 	width: 100%;
 	height: 200px;
