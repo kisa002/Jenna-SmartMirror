@@ -28,13 +28,13 @@ body
 	margin-left: 50px;
 }
 
-.itemBox .menu
+.menu
 {
 	font-size: 2rem;
 	font-weight: 500;
 }
 
-.itemBox .underline
+.underline
 {
 	width: 300px;
 	
@@ -92,7 +92,7 @@ body
 	font-size: 2rem;
 }
 
-.schedule
+.item
 {
 	font-size: 1.8rem;
 }
@@ -122,6 +122,20 @@ body
 {
 	display:table-cell;
 	vertical-align:middle;
+}
+
+.schoolBus
+{
+	margin-top: 50px;
+	margin-left: 50px;
+	
+	color: white;
+	float: left;
+	
+/* 	width: 300px; */
+	height: 150px;
+	
+/* 	background-color: rgba(46, 94, 206, 0.55); */
 }
 
 #result
