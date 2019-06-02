@@ -55,6 +55,8 @@
 					TTS("경지는 산기대에서 가장 작은 소년으로 오픈채팅과 인스타그램에서 여자를 구하고 있습니다");
 				else if(GetCmd("동현"))
 					TTS("강동현은 제 2기숙사 734호 2번 방에 사는 담배 중독자로, 매일 밤 알 수 없는 소리와 함께 샷건을 남발합니다.");
+				else if(GetCmd("승민"))
+					TTS("산기대 공식 CC로써, 커플은 살 가치도 없기에 그냥 나가 뒤지는 것을 추천드립니다");
 				else if(GetCmd("씨발") || GetCmd("시발") || GetCmd("새끼") || GetCmd("병신") || GetCmd("애미"))
 					TTS("입은 마음의 문으로 소중히 다루어주어야 합니다. 9 곱하기 9 = 18 같은 사람아");
 				else if(GetCmd("학식"))
@@ -154,6 +156,7 @@
 					$("#date").text(GetDate());
 				}, 1000);
 				
+/*
 				temp = 0;
 				isUp = true;
 				timerTemperature = setInterval(function()
@@ -175,6 +178,7 @@
 					
 					$("#temperature").text(temp + "°C");
 				}, 1);
+*/
 			});
 		</script>
 	</head>
@@ -202,6 +206,30 @@
 			<div class="item">6교시 - 하드웨어개론</div>
 		</div>
 		
+		<div class="itemBoxR">
+			<div class="menu">오늘 날씨</div>
+			<div class="underline"><hr></div>
+			<table>
+				<tr>
+					<td>10시</td>
+					<td>맑음</td>
+					<td>15도</td>
+				</tr>
+				<tr>
+					<td>12시</td>
+					<td>맑음</td>
+					<td>15도</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="schoolBus">
+			<div class="menu">셔틀버스</div>
+			<div class="underline"><hr></div>
+			<div class="item">오이도행 - 3분전</div>
+			<div class="item">정왕행 - 5분전</div>
+		</div>
+		
 		<div class="grid">
 			<div class="table">
 				<div class="table-cell">
@@ -211,13 +239,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		
-		<div class="schoolBus">
-			<div class="menu">셔틀버스</div>
-			<div class="underline"><hr></div>
-			<div class="item">오이도행 - 3분전</div>
-			<div class="item">정왕행 - 5분전</div>
 		</div>
 	</body>
 </html>

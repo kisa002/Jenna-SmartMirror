@@ -25,7 +25,26 @@ body
 {
 	width: 300px;
 	
+	float: left;
+	
 	margin-left: 50px;
+	margin-bottom: 80px;
+}
+
+.itemBoxR
+{
+	width: 300px;
+	
+	text-align: right;
+	
+	float: right;	
+	margin-right: 50px;
+	margin-bottom: 50px;
+}
+
+.itemBoxR .menu
+{
+	text-align: right;
 }
 
 .menu
@@ -66,7 +85,7 @@ body
 	font-size: 2rem;
 	text-align: left;
 	
-	margin-left: 10px;
+	margin-left: 2px;
 }
 
 
@@ -95,13 +114,25 @@ body
 .item
 {
 	font-size: 1.8rem;
+	
+	margin-top: 2px;
+}
+
+table
+{
+	width: 100%;
+}
+
+td
+{
+	font-size: 1.8rem;
 }
 
 .grid
 {
-	padding-top: 120%; /* MAXIMUM 130% */
+	padding-top: 110%; /* MAXIMUM 130% */
 
-	width: 99%;
+	width: 100%;
 /* 	height: 100%; */
 	
 	position: absolute;
@@ -130,9 +161,8 @@ body
 	margin-left: 50px;
 	
 	color: white;
-	float: left;
 	
-/* 	width: 300px; */
+	width: 300px;
 	height: 150px;
 	
 /* 	background-color: rgba(46, 94, 206, 0.55); */
