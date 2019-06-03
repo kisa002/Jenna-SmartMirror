@@ -25,8 +25,18 @@
 		$temp = explode('</p>', $temp[$i + 1]);
 		$temp = $temp[0];
 		
+		$weather = explode('.png" alt="', $result);
+		$weather = explode('"', $weather[$i + 1]);
+		$weather = $weather[0];
+		
+		$img = explode('"><img src="/', $result);
+		$img = explode('"', $img[$i + 2]);
+		$img = $img[0];
+		
 		$arr[$i]['time'] = $time;
 		$arr[$i]['temp'] = $temp;
+		$arr[$i]['weather'] = $weather;
+		$arr[$i]['img'] = $img;
 		$arr[$i]['day'] = $day;
 		
 		if($time >= 24)
@@ -34,6 +44,6 @@
 	}
 	
 // 	print_r($arr);
-	$json = json_encode($arr);
+	$json = json_encode($arr, JSON_UNESCAPED_UNICODE);
 	echo($json);
 ?>
