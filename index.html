@@ -156,6 +156,73 @@
 					$("#date").text(GetDate());
 				}, 1000);
 				
+				
+				timerWeather = setInterval(function()
+				{
+					GetCurrentWather();
+					GetWather();
+				}, 300000);
+				
+				GetCurrentWather();
+				function GetCurrentWather()
+				{
+					$.ajax(
+					{
+						url: 'https://haeyum.ml/jenna/api/currentWeather',
+						type: 'GET',
+						data: {
+							
+						},
+							dataType: 'text'
+						})
+						.done(function(response) {
+							// console.log(response);
+						})
+						.fail(function(error) {
+							console.log('Get Current Weather ERROR');
+						})
+						.always(function(response) {
+							$('#temperature').text(response);
+						}
+					);
+				}
+				
+				GetWather();
+				function GetWather()
+				{
+					$.ajax(
+					{
+						url: 'https://haeyum.ml/jenna/api/weather',
+						type: 'GET',
+						data: {
+							
+						},
+							dataType: 'json'
+						})
+						.done(function(response) {
+							// console.log(response);
+						})
+						.fail(function(error) {
+							console.log('Get Weather ERROR');
+						})
+						.always(function(response) {
+							for (i=0; i<5; i++)
+							{
+								$('table').find('tbody').append('<tr>');
+								$('table').find('tbody').append('<td>' + response[i]['time'] + "시</td>");
+								$('table').find('tbody').append('<td><img id="imgWeather" src="http://www.weather.go.kr/images/icon/DY/DB01.png"></td>');
+								$('table').find('tbody').append('<td>' + response[i]['temp'] + "℃</td>");
+								$('table').find('tbody').append('</tr>');
+							}
+							
+// 							$('.init').css('display', 'none');
+							$('.init').fadeOut(3000, function ()
+							{
+								console.log('Weather Load Success');
+							});
+						}
+					);
+				}
 /*
 				temp = 0;
 				isUp = true;
@@ -184,15 +251,20 @@
 	</head>
 	
 	<body>
+		<div class="init">
+			초기화를 진행 중 입니다<br><br>
+			본 내용이 30초 이상 나오면 문의 바랍니다 :D
+		</div>
+		
 		<div class="top">
 			<div id="timeBox">
-				<div id="time">이게 보인다면 버그가 생긴거야</div>
+				<div id="time">이게 보인다면 버그가 생긴거야 ㅜㅜ</div>
 				<div id="date">관리자에게 알려줘!</div>
 			</div>
 			
 			<div id="weatherBox" class="">
-				<div id="temperature">69°C</div>
-				<div id="weather">구름 많음</div>
+				<div id="temperature">Wait....</div>
+				<div id="weather">JENNA</div>
 			</div>
 		</div>
 		
@@ -210,16 +282,8 @@
 			<div class="menu">오늘 날씨</div>
 			<div class="underline"><hr></div>
 			<table>
-				<tr>
-					<td>10시</td>
-					<td>맑음</td>
-					<td>15도</td>
-				</tr>
-				<tr>
-					<td>12시</td>
-					<td>맑음</td>
-					<td>15도</td>
-				</tr>
+				<tbody>
+				</tbody>
 			</table>
 		</div>
 		
