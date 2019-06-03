@@ -113,42 +113,102 @@
 		        
 		        return currentTime;
 		    }
+		    
+		    function GetTime()
+			{
+				var d = new Date();
+				
+				hours = d.getHours();
+				
+				if(hours > 12)
+				{
+					hours -= 12;
+					
+					hours = "오후 " + hours;
+				}
+				else
+					hours = "오전 " + hours;
+				
+		        var currentTime = hours + ":" + d.getMinutes();//+ d.getSeconds();
+		        
+		        return currentTime;
+			}
+			
+			function GetDate()
+		    {
+		        var d = new Date();
+		        
+		        var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일";
+		        var result = document.getElementById("time-result");
+		        
+		        return currentDate;
+		    }
+			
+			function GetCurrentWather()
+			{
+				$.ajax(
+				{
+					url: 'https://haeyum.ml/jenna/api/currentWeather',
+					type: 'GET',
+					data: {
+						
+					},
+						dataType: 'text'
+					})
+					.done(function(response) {
+						// console.log(response);
+					})
+					.fail(function(error) {
+						console.log('Get Current Weather ERROR');
+					})
+					.always(function(response) {
+						$('#temperature').text(response);
+					}
+				);
+			}
+			
+			function GetWather()
+			{
+				$.ajax(
+				{
+					url: 'https://haeyum.ml/jenna/api/weather',
+					type: 'GET',
+					data: {
+						
+					},
+						dataType: 'json'
+					})
+					.done(function(response) {
+						// console.log(response);
+					})
+					.fail(function(error) {
+						console.log('Get Weather ERROR');
+					})
+					.always(function(response) {
+						$('table').find('tbody *').remove();
+						for (i=0; i<5; i++)
+						{
+							$('table').find('tbody').append('<tr>');
+							$('table').find('tbody').append('<td>' + response[i]['time'] + "시</td>");
+							$('table').find('tbody').append('<td><img id="imgWeather" src="http://www.weather.go.kr/' + response[i]['img'] + '"></td>');
+							$('table').find('tbody').append('<td>' + response[i]['temp'] + "℃</td>");
+							$('table').find('tbody').append('</tr>');
+						}
+						
+						$('.init').fadeOut(3000, function ()
+						{
+							console.log('Weather Load Success');
+						});
+					}
+				);
+			}
 		</script>
 		
 		<script type="text/javascript">
-			$(document).ready(function() {
+			$(document).ready(function()
+			{
 				$("#time").text(GetTime());
 				$("#date").text(GetDate());
-				
-				function GetTime()
-				{
-					var d = new Date();
-					
-					hours = d.getHours();
-					
-					if(hours > 12)
-					{
-						hours -= 12;
-						
-						hours = "오후 " + hours;
-					}
-					else
-						hours = "오전 " + hours;
-					
-			        var currentTime = hours + ":" + d.getMinutes();//+ d.getSeconds();
-			        
-			        return currentTime;
-				}
-				
-				function GetDate()
-			    {
-			        var d = new Date();
-			        
-			        var currentDate = d.getFullYear() + "년 " + ( d.getMonth() + 1 ) + "월 " + d.getDate() + "일";
-			        var result = document.getElementById("time-result");
-			        
-			        return currentDate;
-			    }
 				
 				timerTimeDate = setInterval(function()
 				{
@@ -164,88 +224,7 @@
 				}, 300000);
 				
 				GetCurrentWather();
-				function GetCurrentWather()
-				{
-					$.ajax(
-					{
-						url: 'https://haeyum.ml/jenna/api/currentWeather',
-						type: 'GET',
-						data: {
-							
-						},
-							dataType: 'text'
-						})
-						.done(function(response) {
-							// console.log(response);
-						})
-						.fail(function(error) {
-							console.log('Get Current Weather ERROR');
-						})
-						.always(function(response) {
-							$('#temperature').text(response);
-						}
-					);
-				}
-				
 				GetWather();
-				function GetWather()
-				{
-					$.ajax(
-					{
-						url: 'https://haeyum.ml/jenna/api/weather',
-						type: 'GET',
-						data: {
-							
-						},
-							dataType: 'json'
-						})
-						.done(function(response) {
-							// console.log(response);
-						})
-						.fail(function(error) {
-							console.log('Get Weather ERROR');
-						})
-						.always(function(response) {
-							for (i=0; i<5; i++)
-							{
-								$('table').find('tbody').append('<tr>');
-								$('table').find('tbody').append('<td>' + response[i]['time'] + "시</td>");
-								$('table').find('tbody').append('<td><img id="imgWeather" src="http://www.weather.go.kr/images/icon/DY/DB01.png"></td>');
-								$('table').find('tbody').append('<td>' + response[i]['temp'] + "℃</td>");
-								$('table').find('tbody').append('</tr>');
-							}
-							
-// 							$('.init').css('display', 'none');
-							$('.init').fadeOut(3000, function ()
-							{
-								console.log('Weather Load Success');
-							});
-						}
-					);
-				}
-/*
-				temp = 0;
-				isUp = true;
-				timerTemperature = setInterval(function()
-				{
-					if(isUp)
-					{
-						temp += 1;
-						
-						if(temp > 1000)
-							isUp = false;
-					}
-					else
-					{
-						temp -= 1;
-						
-						if(temp <= 0)
-							isUp = true;
-					}
-					
-					$("#temperature").text(temp + "°C");
-				}, 1);
-*/
 			});
 		</script>
 	</head>
